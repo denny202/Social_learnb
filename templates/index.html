@@ -1,0 +1,82 @@
+
+{%extends "base.html"%}
+
+{% block title %}
+
+<title>home </title>
+
+{% endblock %}
+
+{%load static %}
+{% block  content %}
+
+            
+
+             <!-- left sidebar-->
+             <div class="space-y-5 flex-shrink-0 lg:w-7/12">
+                {% for post in posts reversed %}
+                <!-- post 1-->
+                <div class="d-flex p-3 border-bottom container-sm">
+                  <a href="/profile/{{post.user}}">
+                    <img src="{{post.profileimg.url}}" class="rounded-circle"
+                      height="50" /></a><a>
+                      <a href="/profile/{{post.user}}">
+                    <div class="d-flex w-100 ps-3">
+                      <div>
+                        <a href="/profile/{{post.user}}">
+                          <h6 class="text-body" >
+                            {{post.user}}
+                            <span class="small text-muted font-weight-normal"> @{{post.user}}</span>
+                            <!-- <p>{{post.created_at}}</p> -->
+                            <span><i class="fas fa-angle-down float-end"></i></span>
+                          </h6>
+                        </a>
+                        <p style="line-height: 1.2;">
+                                <a href="/profile/{{post.user}}"></a> {{post.caption}}
+                            </p>
+    
+                        <div>
+                            <a href="{{post.image.url | default_if_none:'/home/d4nnu/Desktop/Django/Socially_Learn_blend/media/default_user.jpg'}}">  
+                                <img src="{{post.image.url}}"  class="img-fluid rounded mb-3">
+                            </a>
+                        </div>
+                        <ul class="list-unstyled d-flex justify-content-between mb-0 pe-xl-5">
+                          <li>
+                            <i class="far fa-comment"></i>
+                          </li>
+                          <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-left-fill" viewBox="0 0 16 16">
+                            <path d="M2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                          </svg></span></li>
+                         <li> 
+                  <a href="/like-post?post_id={{post.id}}" class="flex items-center space-x-2 " style="text-decoration: none; color: inherit;">
+
+                          <span class="small ps-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+                              </svg>
+                            {{post.no_of_likes}}
+                          </span> 
+                        
+                        </a></li>
+                          <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-share-fill" viewBox="0 0 16 16">
+                            <path d="M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5z"/>
+                          </svg></li>
+                          <li>
+                            <span class="small ps-2"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bookmark-check-fill" viewBox="0 0 16 16">
+                              <path fill-rule="evenodd" d="M2 15.5V2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.74.439L8 13.069l-5.26 2.87A.5.5 0 0 1 2 15.5zm8.854-9.646a.5.5 0 0 0-.708-.708L7.5 7.793 6.354 6.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"/>
+                            </svg></span>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+
+          </div>
+      
+            
+                    
+{% endfor %}
+
+    
+
+    {% endblock %}

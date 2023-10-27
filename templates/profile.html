@@ -1,0 +1,211 @@
+
+{% extends 'main_base.html'%}
+
+
+	
+	{% block title %}
+
+    <title>Profile - {{user_profile.user.username}}</title>
+
+    {% endblock %}
+
+
+{% block content %}
+
+{%load static%}
+<div class="container-fluid">
+    <div class="row">
+
+        <!-- Side Navigation -->
+        <div class="col-3 bg-light d-none d-sm-block">
+			
+			<a href="/"><img class="mb-4"  src="{% static 'images/Learn_t.svg' %}" alt width="100%"
+			height="10%"></a>
+			
+			
+            <ul class="nav flex-column">
+                <li class="nav-item">
+					
+						
+						
+						<div class="form-outline w-auto">
+					
+					<form class="d-flex " role="search" action="/search" method="POST">
+						
+						{% csrf_token %}
+						
+						<input
+						  class="form-control me-2"
+						  type="text"
+						  name="username"
+						  placeholder="Search for username ..."
+						  aria-label="Search"
+						/>
+						<!-- <button class="btn btn-outline-primary" type="submit">Search</button> -->
+					  </form>
+                </li>
+
+                <li class="nav-item">
+					{% for users in username_profile_list %}
+					<section class="search-result-item">
+						<a class="image-link" href="/profile/{{users.user}}"><img class="image" src="{{users.profileimg.url}}">
+						</a>
+						<div class="search-result-item-body">
+							<div class="row">
+								<div class="col-sm-9">
+									<h4 class="search-result-item-heading"><a href="/profile/{{users.user}}"><b>@{{users.user}}</b></a></h4>
+									<p class="info">{{users.location}}</p>
+									<p class="description">{{users.bio}}</p>
+								</div>
+								<!-- <div class="col-sm-3 text-align-center">
+									<p class="value3 mt-sm">$9, 700</p>
+									<p class="fs-mini text-muted">PER WEEK</p><a class="btn btn-primary btn-info btn-sm" href="#">Learn More</a>
+								</div> -->
+							</div>
+						</div>
+					</section>
+					{% endfor %}
+				</li>
+				<li>
+
+					
+					</li>
+            </ul>
+        </div>
+
+        <!-- Middle Section -->
+        <div class="col-9">
+            <section class="h-100 gradient-custom-2">
+				<div class="container py-5 h-100">
+					<div class="row d-flex justify-content-center align-items-center h-100">
+						<div class="col col-lg-9 col-xl-7">
+							<div class="card">
+								<div class="rounded-top text-white d-flex flex-row" style="background-color: #000; height:200px;">
+									<div class="ms-4 mt-5 d-flex flex-column" style="width: 150px;">
+										<img src={{user_profile.profileimg.url}} alt=" placeholder image" class="img-fluid img-thumbnail mt-4 mb-2" style="width: 150px; z-index: 1">
+								
+									</div>
+									<div class="ms-3" style="margin-top: 130px;">
+										<h5>@{{user_profile.user.username}}</h5>
+										<p>{{user_profile.location}}</p>
+									</div>
+								</div>
+							
+								
+								</div>
+								<div class="p-4 text-black" style="background-color: #f8f9fa;">
+						
+									
+									<div>
+										
+										<form action="/follow" method="POST">
+											{% csrf_token %}
+											
+											<div class="add-btn" style="position:relative;">
+											<div style="position: absolute; left: 5%; top: 5px;  " >
+												
+												<input type="hidden" value="{{user.username}}" name="follower" />
+												<input type="hidden" value="{{user_object.username}}" name="user" />
+						
+												{% if user_object.username == user.username %}
+												<a href="/settings"><button type='button' class='btn btn-outline-dark mx-auto' >Settings</button></a>
+													
+												{% else %}
+													<button class='btn btn-outline-dark mx-auto' type="submit">{{btn_text}}</button>
+												{% endif %}
+											</div>
+											</div>
+										</form>
+
+									
+									</div>
+									<div class="d-flex justify-content-end text-center py-1">
+										<div>
+											<p class="mb-1 h5">{{user_post_len}} </p>
+											<p class="small text-muted mb-0">Post{% if user_post_len != 1 %}s{% endif %}</p>
+										  </div>
+										  <div class="px-3">
+											<p class="mb-1 h5">{{user_followers}}</p>
+											<p class="small text-muted mb-0">Follower{% if user_followers != 1 %}s{% endif %}</p>
+										  </div>
+										  <div>
+											<p class="mb-1 h5">{{user_following}}</p>
+											<p class="small text-muted mb-0">Following</p>
+										  </div>
+									
+										</div>
+									  </div>
+									  <div class="card-body p-4 text-black">
+										<div class="mb-5">
+										  <p class="lead fw-normal mb-1">About</p>
+										  <div class="p-4" style="background-color: #f8f9fa;">
+											<p class="font-italic mb-0">{{user_profile.bio}}</p>
+										  </div>
+										</div>
+										<div class="d-flex justify-content-between align-items-center mb-4">
+										  <p class="lead fw-normal mb-0">Recent photos</p>
+										  <p class="mb-0"><a href="#!" class="text-muted">Show all</a></p>
+										</div>
+										<div class="row g-2">
+											{% for post in user_posts %}
+												{% if post.image %}
+													<div class="col-6 mb-2">
+														<a href="{{post.image.url}}"> <!-- Using an anchor tag to make the image clickable -->
+															<img src="{{post.image.url}}" class="w-100 rounded-3">
+														</a>
+													</div>
+												{% endif %}
+											{% endfor %}
+										</div>
+										</div>
+									  </div>
+									</div>
+								  </div>
+								</div>
+							  </div>
+				   </section>
+
+				   
+        </div>
+
+		
+
+    </div>
+</div>
+		
+
+
+
+{% endblock %}
+
+<div class="">
+
+	<div class="">
+
+		<div class="bg-gray-50  border-b border-gray-100 flex items-baseline justify-between py-4 px-6 ">
+			<h2 class="font-semibold text-lg">Users You Can Follow</h2>
+		   
+		</div>
+	   
+		<div class="divide-gray-300 divide-gray-50 divide-opacity-50 divide-y px-4 ">
+
+			{% for suggestion in suggestions_username_profile_list %}
+			<div class="flex items-center justify-between py-3">
+				<div class="flex flex-1 items-center space-x-4">
+					<a href="/profile/{{suggestion.user}}">
+						<img src="{{suggestion.profileimg.url}}" class="bg-gray-200 rounded-full w-10 h-10">
+					</a>
+					<div class="flex flex-col">
+						<span class=""> {{suggestion.user}} </span>
+						<span class=""> {{suggestion.bio}} </span>
+					</div>
+				</div>
+				
+				<a href="/profile/{{suggestion.user}}" class=""> View User </a>
+			</div>
+			{% endfor %}
+
+		</div>
+
+	</div> 
+</div>

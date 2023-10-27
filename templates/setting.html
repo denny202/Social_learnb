@@ -1,0 +1,74 @@
+
+{%extends "base.html"%}
+
+{% block title %}
+
+<title>Settings {{user.username}} </title>
+
+{% endblock %}
+
+{%load static %}
+{% block  content %}
+<body>
+
+
+   
+
+       
+    <section class="vh-100" style="background-color: #fff;">
+        <div class="container py-5 h-100">
+          <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col col-md-9 col-lg-7 col-xl-5">
+              <div class="card" style="border-radius: 15px;">
+                <div class="card-body p-4">
+                  <div class="d-flex text-black">
+                    <div class="flex-shrink-0">
+                      <img src="{{user_profile.profileimg.url}}"
+                        alt="Generic placeholder image" class="img-fluid"
+                        style="width: 180px; border-radius: 10px;">
+                        
+                    </div>
+                    <div class="flex-grow-1 ms-3">
+                      <h5 class="mb-1">{{user.username}}</h5>
+                      <p class="mb-2 pb-1" style="color: #2b2a2a;">{{user_profile.bio}}</p>
+                     
+
+                      <form action="" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                              <div>  
+                                  <div class="col-span-2">
+                                      
+                                      <input type="file" name="image" value="" class="shadow-none bg-gray-100">
+                                  </div>
+                                  <br>
+                                  <div class="col-span-2">
+                                      <label for="about"></label>  
+                                      <textarea id="about" name="bio" rows="3" placeholder="Bio.."  class="shadow-none bg-gray-100">{{user_profile.bio}}</textarea>
+                                  </div> 
+                                  <div class="col-span-2">
+                                      <label for=""> Location</label>
+                                      <input type="text" name="location" value="{{user_profile.location}}" class="shadow-none bg-gray-100">
+                                      
+                                  </div>
+                              </div>
+                              <br>
+
+
+                      <div class="d-flex pt-1">
+                        <button  class="btn btn-outline-primary me-1 flex-grow-1"><a href="/">Cancel</a> </button>
+                        <button type="submit" class="btn btn-primary flex-grow-1">Save</button>
+                    </form>
+                      </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+          
+
+
+{% endblock %}

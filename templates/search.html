@@ -1,0 +1,71 @@
+
+
+
+{% extends 'base.html'%}
+
+
+	
+	{% block title %}
+
+    <title>Search Username</title>
+
+    {% endblock %}
+
+
+{% block content %}
+{% load static %}
+
+
+
+<br>
+
+
+    
+
+                <div class="container d-flex align-items-center justify-content-center">
+                <h2>Results</h2>
+              
+                 </div>
+                   
+
+                 <br>
+
+<!--  -->
+
+
+{% for users in username_profile_list %}
+<div class="container d-flex align-items-center justify-content-center">
+<div class="card mb-3" style="max-width: 540px;">
+  <div class="row g-0">
+    <div class="col-md-4">
+        <a  href="/profile/{{users.user}}"><img class="img-fluid rounded-start" src="{{users.profileimg.url}}">
+        </a>
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        
+        <h5 class="card-title"><a href="/profile/{{users.user}}"><b>@{{users.user}}</b></a></h5>
+        <p class="card-text">{{users.location}}</p>
+        <p class="card-text">{{users.bio}}</p>
+      </div>
+    </div>
+  </div>
+</div>
+</div> 
+{% endfor %}
+<!--  -->
+      
+</div>
+                    </div>
+                </div>
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+{%endblock%}
