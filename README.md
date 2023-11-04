@@ -4,6 +4,7 @@ A social learining platform that allows you to share what you are learning with 
 
 ### To debug
 User recommendations in not showing in main page 
+Post profile pictures not showing
 
 
 ### Working on  
