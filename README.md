@@ -1,6 +1,8 @@
 # Social_learnb
 A social learining platform that allows you to share what you are learning with friends and blend with like minded people
 
+##Built in Django using SQL DB
+
 
 ### To debug
 User recommendations in not showing in main page 
